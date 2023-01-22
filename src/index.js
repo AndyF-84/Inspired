@@ -1,29 +1,49 @@
-import './index.html';
-import './index.scss';
+import "./index.html";
+import "./index.scss";
 
-import { router } from './modules/router';
-import { mainPage } from './modules/mainPage/mainPage';
-import { renderHeader } from './modules/render/renderHeader';
-import { renderFooter } from './modules/render/renderFooter';
-import { womanMainPage } from './modules/mainPage/womanMainPage';
-import { manMainPage } from './modules/mainPage/manMainPage';
+import { router } from "./modules/router";
+import { mainPage } from "./modules/mainPage/mainPage";
+import { renderHeader } from "./modules/render/renderHeader";
+import { renderFooter } from "./modules/render/renderFooter";
+import { womanMainPage } from "./modules/mainPage/womanMainPage";
+import { manMainPage } from "./modules/mainPage/manMainPage";
 
+const init = async () => {
+        const data = await getData("http://localhost8024/api/goods");
+        console.log("data: ", data);
+    };
 
-router.on('*', () => {  //если в адресной строке любой адрес( означает *)
-    renderHeader();
-    renderFooter();
+init();
+// const init = async () => {
+//     const data = await getData('http://localhost:8024/api/goods', {
+//         gender: 'man',
+//         category: 'bathrobes',
+//         page: 2
+//     });
+//     console.log('data: ', data);
+// }
+
+// init();
+
+router.on("*", () => {
+  //если в адресной строке любой адрес( означает *)
+  renderHeader();
+  renderFooter();
 });
 
-router.on('/', () => {  //если адресная строка сайта начинается с /
-    mainPage ();
+router.on("/", () => {
+  //если адресная строка сайта начинается с /
+  mainPage();
 });
 
-router.on('woman', () => {  //если находимся на стронице woman
-    womanMainPage();
+router.on("woman", () => {
+  //если находимся на стронице woman
+  womanMainPage();
 });
 
-router.on('man', () => {  //если находимся на стронице man
-    manMainPage();
+router.on("man", () => {
+  //если находимся на стронице man
+  manMainPage();
 });
 
 // setTimeout ( () => {
@@ -35,7 +55,6 @@ router.on('man', () => {  //если находимся на стронице ma
 // }, 6000)
 
 router.resolve();
-
 
 // import code from './img/code.png'
 // import { mult, sum } from './modules/calc';
